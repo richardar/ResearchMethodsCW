@@ -1,1 +1,1 @@
-web: gunicorn -w 4 main:fastapi_app
+web: gunicorn main:fastapi_app

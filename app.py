@@ -120,7 +120,7 @@ def update_chart(gender, age, chart_type):
         values='mean_ghgs',
         color='mean_ghgs',
         color_continuous_scale='RdBu',
-        title='🌞 GHG Emissions by Gender → Age → Diet'
+        title=' GHG Emissions by Gender → Age → Diet'
     )
     sunburst_fig.update_layout(title_x=0.5)
 
@@ -130,7 +130,7 @@ def update_chart(gender, age, chart_type):
         corr,
         text_auto=True,
         color_continuous_scale='RdBu_r',
-        title='🔥 Correlation Heatmap of Environmental Metrics'
+        title=' Correlation Heatmap of Environmental Metrics'
     )
     heatmap_fig.update_layout(title_x=0.5)
 
@@ -143,7 +143,7 @@ def update_chart(gender, age, chart_type):
         df_scaled, x='mean_ghgs', y='mean_land', z='mean_watuse',
         color='Cluster',
         symbol='diet_group',
-        title='🧬 3D Clustering of Environmental Impact',
+        title=' 3D Clustering of Environmental Impact',
         color_continuous_scale='Viridis'
     )
     cluster_fig.update_layout(title_x=0.5)
@@ -156,7 +156,7 @@ def update_chart(gender, age, chart_type):
         z='mean_land',
         histfunc='avg',
         color_continuous_scale='Viridis',
-        title='🌍 Avg Land Use by Age and Diet Group'
+        title=' Avg Land Use by Age and Diet Group'
     )
     density_fig.update_layout(title_x=0.5)
     
