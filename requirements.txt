@@ -1,0 +1,7 @@
+fastapi
+dash
+gunicorn
+scikit-learn
+plotly
+pandas
+numpy
