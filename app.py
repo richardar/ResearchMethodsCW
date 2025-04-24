@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import numpy as np
 
-# === Load Data ===
+# Load Data
 df = pd.read_csv(r"https://drive.google.com/uc?export=download&id=1XbbQg3cyd3XHk0AWepjC8QK4jc1IHP-b")
 
 # Use only relevant columns
@@ -26,12 +26,12 @@ scaler = StandardScaler()
 df_scaled = df.copy()
 df_scaled[numeric_cols] = scaler.fit_transform(df[numeric_cols])
 
-# === App Setup ===
+# App Setup 
 app = Dash(__name__)
 app.title = "Sustainability Dashboard"
 
 app.layout = html.Div([  
-    html.H1("🌱 Diet & Environmental Impact Dashboard", style={'textAlign': 'center'}),
+    html.H1(" Diet & Environmental Impact Dashboard", style={'textAlign': 'center'}),
 
     html.Div([
         html.Label("Gender"),
@@ -65,7 +65,7 @@ app.layout = html.Div([
     html.Div(id='main-graph', style={'marginTop': '30px'})
 ])
 
-# === Callback ===
+# Callback 
 @app.callback(
     Output('main-graph', 'children'),
     Input('gender', 'value'),
