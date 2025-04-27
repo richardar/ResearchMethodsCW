@@ -17,16 +17,13 @@ columns_to_use = [
 ]
 df = df[columns_to_use].dropna()
 
-# Separate numeric and categorical
 numeric_cols = ['mean_ghgs', 'mean_land', 'mean_watuse', 'mean_acid', 'mean_eut', 'mean_bio']
 cat_cols = ['sex', 'diet_group', 'age_group']
 
-# Scale numeric
 scaler = StandardScaler()
 df_scaled = df.copy()
 df_scaled[numeric_cols] = scaler.fit_transform(df[numeric_cols])
 
-# App Setup 
 app = Dash(__name__)
 app.title = "Sustainability Dashboard"
 
@@ -65,7 +62,6 @@ app.layout = html.Div([
     html.Div(id='main-graph', style={'marginTop': '30px'})
 ])
 
-# Callback 
 @app.callback(
     Output('main-graph', 'children'),
     Input('gender', 'value'),
@@ -73,7 +69,6 @@ app.layout = html.Div([
     Input('chart-tabs', 'value')
 )
 def update_chart(gender, age, chart_type):
-    # Filter data based on the "All" option
     if gender != 'All':
         filtered = df_scaled[df_scaled['sex'] == gender]
     else:
@@ -134,6 +129,70 @@ def update_chart(gender, age, chart_type):
     )
     heatmap_fig.update_layout(title_x=0.5)
 
+
+'''
+#     # Clustering
+#     cluster_df = df_scaled[numeric_cols].copy()
+#     kmeans = KMeans(n_clusters=3, n_init='auto', random_state=42)
+#     df_scaled['Cluster'] = kmeans.fit_predict(cluster_df)
+
+#     cluster_fig = px.scatter_3d(
+#         df_scaled, x='mean_ghgs', y='mean_land', z='mean_watuse',
+#         color='Cluster',
+#         symbol='diet_group',
+#         title=' 3D Clustering of Environmental Impact',
+#         color_continuous_scale='Viridis'
+#     )
+#     cluster_fig.update_layout(title_x=0.5)
+
+#     # Density
+#     density_fig = px.density_heatmap(
+#         df,
+#         x='age_group',
+#         y='diet_group',
+#         z='mean_land',
+#         histfunc='avg',
+#         color_continuous_scale='Viridis',
+#         title=' Avg Land Use by Age and Diet Group'
+#     )
+#     density_fig.update_layout(title_x=0.5)
+    
+    
+#     config = {
+#         'displayModeBar': True,
+#         'scrollZoom': True,
+#         'responsive': True,
+#         'toImageButtonOptions': {'format': 'png', 'width': 1500, 'height': 1000}
+#     }
+
+#     # Return selected or all charts
+#     if chart_type == 'radar':
+#         return dcc.Graph(figure=radar_fig, config=config)
+#     elif chart_type == 'violin':
+#         return dcc.Graph(figure=violin_fig, config=config)
+#     elif chart_type == 'parallel':
+#         return dcc.Graph(figure=parallel_fig, config=config)
+#     elif chart_type == 'sunburst':
+#         return dcc.Graph(figure=sunburst_fig, config=config)
+#     elif chart_type == 'heatmap':
+#         return dcc.Graph(figure=heatmap_fig, config=config)
+#     elif chart_type == 'cluster':
+#         return dcc.Graph(figure=cluster_fig, config=config)
+#     elif chart_type == 'density':
+#         return dcc.Graph(figure=density_fig, config=config)
+#     else:  # 'all'
+#         return [
+#             dcc.Graph(figure=radar_fig, config=config),
+#             dcc.Graph(figure=violin_fig, config=config),
+#             dcc.Graph(figure=parallel_fig, config=config),
+#             dcc.Graph(figure=sunburst_fig, config=config),
+#             dcc.Graph(figure=heatmap_fig, config=config),
+#             dcc.Graph(figure=cluster_fig, config=config),
+#             dcc.Graph(figure=density_fig, config=config)
+#         ]
+
+# server = app.server'''
+
     # Clustering
     cluster_df = df_scaled[numeric_cols].copy()
     kmeans = KMeans(n_clusters=3, n_init='auto', random_state=42)
@@ -160,7 +219,7 @@ def update_chart(gender, age, chart_type):
     )
     density_fig.update_layout(title_x=0.5)
     
-    # Set config for high-quality rendering
+    
     config = {
         'displayModeBar': True,
         'scrollZoom': True,
